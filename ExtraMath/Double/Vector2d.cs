@@ -291,6 +291,7 @@ namespace ExtraMath
             y = v.y;
         }
 
+#if GODOT
         public static explicit operator Godot.Vector2(Vector2d value)
         {
             return new Godot.Vector2((real_t)value.x, (real_t)value.y);
@@ -300,6 +301,17 @@ namespace ExtraMath
         {
             return new Vector2d(value.x, value.y);
         }
+#elif UNITY_5_3_OR_NEWER
+        public static explicit operator UnityEngine.Vector2(Vector2d value)
+        {
+            return new UnityEngine.Vector2((real_t)value.x, (real_t)value.y);
+        }
+
+        public static implicit operator Vector2d(UnityEngine.Vector2 value)
+        {
+            return new Vector2d(value.x, value.y);
+        }
+#endif
 
         public static explicit operator Vector2i(Vector2d value)
         {
